@@ -28,6 +28,19 @@ router
   })
   .get("/:actionId", getAction, (req, res, next) => {
     res.status(200).json(req.action);
+  })
+  .delete("/:actionId", getAction, async (req, res, next) => {
+    const { actionId } = req.params;
+    try {
+      const deleted = await actionDb.remove(actionId);
+      if (deleted === 1) {
+        res.sendStatus(204);
+      } else {
+        next({ code: 500 });
+      }
+    } catch (err) {
+      next({ code: 500 });
+    }
   });
 
 module.exports = router;
