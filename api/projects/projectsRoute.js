@@ -21,7 +21,7 @@ router
     try {
       const newProject = await projectDb.insert(req.project);
       if (newProject) {
-        res.status(200).json(newProject);
+        res.status(201).json(newProject);
       } else {
         next({ code: 500 });
       }
