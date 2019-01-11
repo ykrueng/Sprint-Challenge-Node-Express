@@ -3,6 +3,7 @@ const express = require("express");
 const actionDb = require("../../data/helpers/actionModel");
 const valActions = require("../common/valActions");
 const getAction = require("../common/getAction");
+const valUpdateAction = require("../common/valUpdateAction");
 
 const router = express.Router({ mergeParams: true });
 
@@ -35,6 +36,19 @@ router
       const deleted = await actionDb.remove(actionId);
       if (deleted === 1) {
         res.sendStatus(204);
+      } else {
+        next({ code: 500 });
+      }
+    } catch (err) {
+      next({ code: 500 });
+    }
+  })
+  .put("/:actionId", getAction, valUpdateAction, async (req, res, next) => {
+    const { actionId } = req.params;
+    try {
+      const updatedAction = await actionDb.update(actionId, req.newAction);
+      if (updatedAction) {
+        res.status(200).json(updatedAction);
       } else {
         next({ code: 500 });
       }
