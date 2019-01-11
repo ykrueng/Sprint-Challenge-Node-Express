@@ -4,6 +4,7 @@ const projectDb = require("../../data/helpers/projectModel");
 const valProject = require("../common/valProject");
 const getProject = require("../common/getProject");
 const valUpdateProject = require("../common/valUpdateProject");
+const actionsRoute = require("../actions/actionsRoute");
 
 const router = express.Router();
 
@@ -55,5 +56,7 @@ router
       next({ code: 500 });
     }
   });
+
+router.use("/:projectId/actions/", getProject, actionsRoute);
 
 module.exports = router;
