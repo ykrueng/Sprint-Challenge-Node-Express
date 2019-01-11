@@ -2,6 +2,7 @@ const express = require("express");
 
 const projectDb = require("../../data/helpers/projectModel");
 const valProject = require("../common/valProject");
+const getProject = require("../common/getProject");
 
 const router = express.Router();
 
@@ -25,6 +26,9 @@ router
     } catch (err) {
       next({ code: 500 });
     }
-  });
+  })
+  .get("/:projectId", getProject, async (req, res, next) => {
+    res.status(200).json(req.project);
+  })
 
 module.exports = router;
