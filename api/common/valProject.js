@@ -1,8 +1,7 @@
 module.exports = (req, res, next) => {
   const { name, description, completed } = req.body;
 
-  const validatedName =
-    (name && typeof name === "string") || name.length <= 128;
+  const validatedName = name && typeof name === "string" && name.length <= 128;
   const validatedDescription = description && typeof description === "string";
 
   if (!validatedName || !validatedDescription) {

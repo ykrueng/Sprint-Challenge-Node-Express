@@ -3,6 +3,7 @@ const express = require("express");
 const projectDb = require("../../data/helpers/projectModel");
 const valProject = require("../common/valProject");
 const getProject = require("../common/getProject");
+const valUpdateProject = require("../common/valUpdateProject");
 
 const router = express.Router();
 
@@ -36,6 +37,19 @@ router
       const deleted = await projectDb.remove(projectId);
       if (deleted === 1) {
         res.sendStatus(204);
+      }
+    } catch (err) {
+      next({ code: 500 });
+    }
+  })
+  .put("/:projectId", getProject, valUpdateProject, async (req, res, next) => {
+    const { projectId } = req.params;
+    try {
+      const updatedProject = await projectDb.update(projectId, req.project);
+      if (updatedProject) {
+        res.status(200).json(updatedProject);
+      } else {
+        next({ code: 500 });
       }
     } catch (err) {
       next({ code: 500 });
