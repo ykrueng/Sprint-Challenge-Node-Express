@@ -40,7 +40,8 @@ router
         res.sendStatus(204);
       }
     } catch (err) {
-      next({ code: 500 });
+      err.code = 500; // more comprehensive error object
+      next(err);
     }
   })
   .put("/:projectId", getProject, valUpdateProject, async (req, res, next) => {

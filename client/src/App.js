@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import axios from "axios";
 
 import ProjectList from "./components/ProjectList";
+import ProjectCard from "./components/ProjectCard";
 
 class App extends React.Component {
   state = {
@@ -19,9 +20,14 @@ class App extends React.Component {
   render() {
     const { projects } = this.state;
     return (
-      <Route exact path="/" render={props => (
-        <ProjectList {...props} projects={projects} />
-      )} />
+      <>
+        <Route
+          exact
+          path="/"
+          render={props => <ProjectList {...props} projects={projects} />}
+        />
+        <Route path="/projects/:id" render={props => <ProjectCard {...props} />} />
+      </>
     );
   }
 }
