@@ -25,14 +25,19 @@ In this challenge, create a web API around the following resources: `Projects` a
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Mention two parts of Express that you learned about this week.
+  middleware and router
 
 - [ ] Describe Middleware?
+  a function that takes err(optional), req, res, and next as arguments and extends the functionality of express.
 
 - [ ] Describe a Resource?
+  data that is being communicated between client and server.
 
 - [ ] What can the API return to help clients know if a request was successful?
+  status codes. There are several success codes such as 200, 201 (create), 204(no content)
 
 - [ ] How can we partition our application into sub-applications?
+  using middleware and route are some ways to partition our app.
 
 ## Project Setup
 
